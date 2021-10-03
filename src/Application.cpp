@@ -3,6 +3,47 @@
 
 #include <iostream>
 
+static uint32_t CompileShader(uint32_t type, const std::string& source)
+{
+    uint32_t id{ glCreateShader(type) };
+    const char* src{ source.c_str() };
+    glShaderSource(id, 1, &src, nullptr);
+    glCompileShader(id);
+
+    int32_t result;
+    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+    if (result == GL_FALSE)
+    {
+        int32_t length;
+        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+        char* message{ static_cast<char*>(alloca(length * sizeof(char))) };
+        glGetShaderInfoLog(id, length, &length, message);
+        std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader:" << std::endl;
+        std::cout << message << std::endl;
+        glDeleteShader(id);
+        return 0;
+    }
+
+    return id;
+}
+
+static uint32_t CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+{
+    uint32_t program{ glCreateProgram() };
+    uint32_t vs{ CompileShader(GL_VERTEX_SHADER, vertexShader) };
+    uint32_t fs{ CompileShader(GL_FRAGMENT_SHADER, fragmentShader) };
+
+    glAttachShader(program, vs);
+    glAttachShader(program, fs);
+    glLinkProgram(program);
+    glValidateProgram(program);
+
+    glDeleteShader(vs);
+    glDeleteShader(fs);
+
+    return program;
+}
+
 int main()
 {
     GLFWwindow* window;
@@ -27,10 +68,10 @@ int main()
 
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 
-    float positions[2 * 3] {
+    float positions[2 * 3]{
             -0.5f, -0.5f,
-             0.0f,  0.5f,
-             0.5f, -0.5f
+            0.0f, 0.5f,
+            0.5f, -0.5f
     };
 
     uint32_t buffer;
@@ -41,6 +82,30 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
+    const std::string vertexShader{R"glsl(
+        #version 330 core
+
+        layout(location = 0) in vec4 position;
+
+        void main()
+        {
+            gl_Position = position;
+        }
+    )glsl"};
+
+    const std::string fragmentShader{R"glsl(
+        #version 330 core
+
+        layout(location = 0) out vec4 color;
+
+        void main()
+        {
+            color = vec4(1.0, 0.0, 0.0, 1.0);
+        }
+    )glsl"};
+
+    uint32_t shader{ CreateShader(vertexShader, fragmentShader) };
+    glUseProgram(shader);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
