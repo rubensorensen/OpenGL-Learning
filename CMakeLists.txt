@@ -24,7 +24,6 @@ target_include_directories(OpenGL_Learning
 
 target_link_libraries(OpenGL_Learning
     PUBLIC
-        opengl32
         glfw
         libglew_static
     )
