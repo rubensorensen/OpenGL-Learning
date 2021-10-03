@@ -2,6 +2,44 @@
 #include "GLFW/glfw3.h"
 
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+
+struct ShaderProgramSource
+{
+    std::string VertexSource;
+    std::string FragmentSource;
+};
+
+static ShaderProgramSource ParseShader(const std::string& filepath)
+{
+    std::ifstream stream(filepath);
+
+    enum class ShaderType{
+        NONE = -1,
+        VERTEX = 0,
+        FRAGMENT = 1
+    };
+
+    std::string line;
+    std::stringstream ss[2];
+    ShaderType type = ShaderType::NONE;
+    while (getline(stream, line))
+    {
+        if (line.find("#shader") != std::string::npos)
+        {
+            if (line.find("vertex") != std::string::npos)
+                type = { ShaderType::VERTEX };
+            else if (line.find("fragment") != std::string::npos)
+                type = { ShaderType::FRAGMENT };
+        }
+        else
+            ss[static_cast<int32_t>(type)] << line << '\n';
+    }
+
+    return {ss[static_cast<int32_t>(ShaderType::VERTEX)].str(), ss[static_cast<int32_t>(ShaderType::FRAGMENT)].str()};
+}
 
 static uint32_t CompileShader(uint32_t type, const std::string& source)
 {
@@ -82,29 +120,8 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
-    const std::string vertexShader{R"glsl(
-        #version 330 core
-
-        layout(location = 0) in vec4 position;
-
-        void main()
-        {
-            gl_Position = position;
-        }
-    )glsl"};
-
-    const std::string fragmentShader{R"glsl(
-        #version 330 core
-
-        layout(location = 0) out vec4 color;
-
-        void main()
-        {
-            color = vec4(1.0, 0.0, 0.0, 1.0);
-        }
-    )glsl"};
-
-    uint32_t shader{ CreateShader(vertexShader, fragmentShader) };
+    ShaderProgramSource source{ ParseShader("../res/shaders/Basic.shader") };
+    uint32_t shader{ CreateShader(source.VertexSource, source.FragmentSource) };
     glUseProgram(shader);
 
     /* Loop until the user closes the window */
