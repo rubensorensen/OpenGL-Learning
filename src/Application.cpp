@@ -126,6 +126,9 @@ int main()
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    // Sync framerate with monitor refresh rate
+    glfwSwapInterval(1);
+
     if ((glewInit() != GLEW_OK))
         std::cout << "Error on glewInit" << std::endl;
 
@@ -161,13 +164,25 @@ int main()
     unsigned int shader{ CreateShader(source.VertexSource, source.FragmentSource) };
     GLCall(glUseProgram(shader));
 
+    GLCall(int location{ glGetUniformLocation(shader, "u_Color") });
+    ASSERT(location != -1);
+    GLCall(glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f));
+
+    float r{ 0.0f };
+    float incr{ 0.01f };
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
+        GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
         GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+
+        if (r > 1.0f || r < 0.0f)
+            incr *= -1.0f;
+        r += incr;
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
