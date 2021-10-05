@@ -14,20 +14,7 @@ struct VertexBufferElement
     unsigned int Count;
     unsigned char Normalized;
 
-    static unsigned int GetTypeSize(unsigned int type)
-    {
-        switch (type)
-        {
-            case GL_FLOAT:
-                return 4;
-            case GL_UNSIGNED_INT:
-                return 4;
-            case GL_UNSIGNED_BYTE:
-                return 1;
-        }
-        ASSERT(false);
-        return 0;
-    }
+    static unsigned int GetTypeSize(unsigned int type);
 };
 
 class VertexBufferLayout
@@ -37,32 +24,8 @@ public:
             : m_Stride(0)
     {}
 
-    template<typename T>
-    void Push(unsigned int count)
-    {
-        std::cout << "Unsupported type" << std::endl;
-    }
-
-    template<>
-    void Push<float>(unsigned int count)
-    {
-        m_Elements.push_back({ GL_FLOAT, count, GL_FALSE });
-        m_Stride += count * VertexBufferElement::GetTypeSize(GL_FLOAT);
-    }
-
-    template<>
-    void Push<unsigned int>(unsigned int count)
-    {
-        m_Elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
-        m_Stride += count * VertexBufferElement::GetTypeSize(GL_UNSIGNED_INT);
-    }
-
-    template<>
-    void Push<unsigned char>(unsigned int count)
-    {
-        m_Elements.push_back({ GL_UNSIGNED_BYTE, count, GL_FALSE });
-        m_Stride += count * VertexBufferElement::GetTypeSize(GL_UNSIGNED_BYTE);
-    }
+    template <typename T>
+    void Push(unsigned int count);
 
     inline const std::vector<VertexBufferElement>& GetElements() const
     { return m_Elements; }
@@ -74,6 +37,49 @@ private:
     std::vector<VertexBufferElement> m_Elements;
     unsigned int m_Stride;
 };
+
+
+inline unsigned int VertexBufferElement::GetTypeSize(unsigned int type)
+{
+    switch (type)
+    {
+        case GL_FLOAT:
+            return 4;
+        case GL_UNSIGNED_INT:
+            return 4;
+        case GL_UNSIGNED_BYTE:
+            return 1;
+    }
+    ASSERT(false);
+    return 0;
+}
+
+template<typename T>
+inline void VertexBufferLayout::Push(unsigned int count)
+{
+    std::cout << "Unsupported type" << std::endl;
+}
+
+template<>
+inline void VertexBufferLayout::Push<float>(unsigned int count)
+{
+    m_Elements.push_back({ GL_FLOAT, count, GL_FALSE });
+    m_Stride += count * VertexBufferElement::GetTypeSize(GL_FLOAT);
+}
+
+template<>
+inline void VertexBufferLayout::Push<unsigned int>(unsigned int count)
+{
+    m_Elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
+    m_Stride += count * VertexBufferElement::GetTypeSize(GL_UNSIGNED_INT);
+}
+
+template<>
+inline void VertexBufferLayout::Push<unsigned char>(unsigned int count)
+{
+    m_Elements.push_back({ GL_UNSIGNED_BYTE, count, GL_FALSE });
+    m_Stride += count * VertexBufferElement::GetTypeSize(GL_UNSIGNED_BYTE);
+}
 
 
 #endif //OPENGL_LEARNING_VERTEXBUFFERLAYOUT_H
