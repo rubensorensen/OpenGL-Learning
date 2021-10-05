@@ -135,9 +135,6 @@ int main()
         layout.Push<float>(2);
         va.AddBuffer(vb, layout);
 
-        GLCall(glEnableVertexAttribArray(0));
-        GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
-
         IndexBuffer ib(indices, 2 * 3);
 
         ShaderProgramSource source{ ParseShader("../res/shaders/Basic.shader") };
