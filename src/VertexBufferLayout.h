@@ -5,9 +5,6 @@
 
 #include "Renderer.h"
 
-#include <vector>
-#include <iostream>
-
 struct VertexBufferElement
 {
     unsigned int Type;
