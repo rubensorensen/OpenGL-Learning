@@ -20,7 +20,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(800, 600, "Hello World", nullptr, nullptr);
+    window = glfwCreateWindow(800, 600, "OpenGL - Learning", nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
