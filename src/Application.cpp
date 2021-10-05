@@ -56,6 +56,7 @@ int main()
         VertexBuffer vb(positions, 4 * 2 * sizeof(float));
         VertexBufferLayout layout;
         layout.Push<float>(2);
+
         VertexArray va;
         va.AddBuffer(vb, layout);
 
