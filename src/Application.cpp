@@ -105,6 +105,7 @@ int main()
         std::cout << "Error on glewInit" << std::endl;
 
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+    std::cout << "OpenGL Renderer: " << glGetString(GL_RENDERER) << std::endl;
 
     float positions[2 * 3]{
             -0.5f, -0.5f,
