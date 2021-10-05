@@ -11,7 +11,12 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/extern/glew)
 target_sources(OpenGL_Learning
     PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/src/Application.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/Renderer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/VertexBuffer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/IndexBuffer.cpp
     PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}/src/Renderer.h
+        ${CMAKE_CURRENT_LIST_DIR}/src/IndexBuffer.h
     )
 
 target_include_directories(OpenGL_Learning
