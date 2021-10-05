@@ -15,8 +15,8 @@ struct ShaderProgramSource
 static ShaderProgramSource ParseShader(const std::string& filepath)
 {
     std::ifstream stream(filepath);
-
-    enum class ShaderType{
+    enum class ShaderType
+    {
         NONE = -1,
         VERTEX = 0,
         FRAGMENT = 1
@@ -38,7 +38,7 @@ static ShaderProgramSource ParseShader(const std::string& filepath)
             ss[static_cast<int>(type)] << line << '\n';
     }
 
-    return {ss[static_cast<int>(ShaderType::VERTEX)].str(), ss[static_cast<int>(ShaderType::FRAGMENT)].str()};
+    return { ss[static_cast<int>(ShaderType::VERTEX)].str(), ss[static_cast<int>(ShaderType::FRAGMENT)].str() };
 }
 
 static unsigned int CompileShader(unsigned int type, const std::string& source)
