@@ -53,11 +53,10 @@ int main()
                 2, 3, 0
         };
 
-        VertexArray va;
         VertexBuffer vb(positions, 4 * 2 * sizeof(float));
-
         VertexBufferLayout layout;
         layout.Push<float>(2);
+        VertexArray va;
         va.AddBuffer(vb, layout);
 
         IndexBuffer ib(indices, 2 * 3);
