@@ -6,5 +6,6 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <unordered_map>
 
 #endif //OPENGL_LEARNING_PCH_H

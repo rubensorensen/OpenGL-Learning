@@ -16,11 +16,13 @@ target_sources(OpenGL_Learning
         ${CMAKE_CURRENT_LIST_DIR}/src/VertexBuffer.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/IndexBuffer.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/VertexArray.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/Shader.cpp
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/src/Renderer.h
         ${CMAKE_CURRENT_LIST_DIR}/src/IndexBuffer.h
         ${CMAKE_CURRENT_LIST_DIR}/src/VertexArray.h
         ${CMAKE_CURRENT_LIST_DIR}/src/VertexBufferLayout.h
+        ${CMAKE_CURRENT_LIST_DIR}/src/Shader.h
     )
 
 target_include_directories(OpenGL_Learning
