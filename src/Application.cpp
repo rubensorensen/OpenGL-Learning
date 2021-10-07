@@ -2,11 +2,7 @@
 #include "GLFW/glfw3.h"
 
 #include "Renderer.h"
-#include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
-#include "IndexBuffer.h"
-#include "VertexArray.h"
-#include "Shader.h"
 
 int main()
 {
