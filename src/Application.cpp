@@ -60,14 +60,6 @@ int main()
         IndexBuffer ib(indices, 2 * 3);
 
         Shader shader("../res/shaders/Basic.shader");
-        shader.Bind();
-        shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
-
-        va.Unbind();
-        vb.Unbind();
-        ib.Unbind();
-        shader.Unbind();
-
         Renderer renderer;
 
         float r{ 0.0f };
@@ -78,10 +70,8 @@ int main()
         {
             /* Render here */
             renderer.Clear();
-
             shader.Bind();
             shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
-
             renderer.Draw(va, ib, shader);
 
             if (r > 1.0f || r < 0.0f)
