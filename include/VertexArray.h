@@ -2,6 +2,7 @@
 #define OPENGL_LEARNING_VERTEXARRAY_H
 
 #include "VertexBuffer.h"
+#include "pch.h"
 
 class VertexBufferLayout;
 
@@ -18,8 +19,6 @@ public:
 
 private:
     unsigned int m_RendererID;
-
 };
 
-
-#endif //OPENGL_LEARNING_VERTEXARRAY_H
+#endif // OPENGL_LEARNING_VERTEXARRAY_H

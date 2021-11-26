@@ -1,6 +1,8 @@
 #ifndef OPENGL_LEARNING_VERTEXBUFFER_H
 #define OPENGL_LEARNING_VERTEXBUFFER_H
 
+#include "pch.h"
+
 class VertexBuffer
 {
 public:
@@ -14,4 +16,4 @@ private:
     unsigned int m_RendererID;
 };
 
-#endif //OPENGL_LEARNING_VERTEXBUFFER_H
+#endif // OPENGL_LEARNING_VERTEXBUFFER_H

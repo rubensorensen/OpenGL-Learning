@@ -39,16 +39,13 @@ int main()
     {
 
         float positions[]{
-                -0.5f, -0.5f, // 0
-                0.5f, -0.5f, // 1
-                0.5f, 0.5f, // 2
-                -0.5f, 0.5f  // 3
+            -0.5f, -0.5f, // 0
+            0.5f,  -0.5f, // 1
+            0.5f,  0.5f,  // 2
+            -0.5f, 0.5f   // 3
         };
 
-        unsigned int indices[]{
-                0, 1, 2,
-                2, 3, 0
-        };
+        unsigned int indices[]{0, 1, 2, 2, 3, 0};
 
         VertexBuffer vb(positions, 4 * 2 * sizeof(float));
         VertexBufferLayout layout;
@@ -62,8 +59,8 @@ int main()
         Shader shader("../res/shaders/Basic.shader");
         Renderer renderer;
 
-        float r{ 0.0f };
-        float incr{ 0.01f };
+        float r{0.0f};
+        float incr{0.01f};
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
@@ -84,7 +81,6 @@ int main()
             /* Poll for and process events */
             glfwPollEvents();
         }
-
     }
 
     glfwTerminate();

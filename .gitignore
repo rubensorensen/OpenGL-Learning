@@ -1,3 +1,6 @@
 .idea
+.cache
 cmake-build-debug
 cmake-build-release
+tags
+build

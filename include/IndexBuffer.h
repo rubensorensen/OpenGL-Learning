@@ -1,6 +1,8 @@
 #ifndef OPENGL_LEARNING_INDEXBUFFER_H
 #define OPENGL_LEARNING_INDEXBUFFER_H
 
+#include "pch.h"
+
 class IndexBuffer
 {
 public:
@@ -17,4 +19,4 @@ private:
     unsigned int m_Count;
 };
 
-#endif //OPENGL_LEARNING_INDEXBUFFER_H
+#endif // OPENGL_LEARNING_INDEXBUFFER_H

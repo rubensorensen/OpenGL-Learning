@@ -18,23 +18,23 @@ target_sources(OpenGL_Learning
         ${CMAKE_CURRENT_LIST_DIR}/src/VertexArray.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/Shader.cpp
     PUBLIC
-        ${CMAKE_CURRENT_LIST_DIR}/src/Renderer.h
-        ${CMAKE_CURRENT_LIST_DIR}/src/IndexBuffer.h
-        ${CMAKE_CURRENT_LIST_DIR}/src/VertexArray.h
-        ${CMAKE_CURRENT_LIST_DIR}/src/VertexBufferLayout.h
-        ${CMAKE_CURRENT_LIST_DIR}/src/Shader.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/Renderer.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/IndexBuffer.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/VertexArray.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/VertexBufferLayout.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/Shader.h
     )
 
 target_include_directories(OpenGL_Learning
     PUBLIC
-        ${CMAKE_CURRENT_LIST_DIR}/src
+        ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/extern/glfw/include
         ${CMAKE_CURRENT_LIST_DIR}/extern/glew/include
     )
 
 target_precompile_headers(OpenGL_Learning
     PUBLIC
-        ${CMAKE_CURRENT_LIST_DIR}/src/pch.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/pch.h
     )
 
 
